@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persons.API.Database;
 
@@ -10,12 +11,52 @@ using Persons.API.Database;
 namespace Persons.API.Migrations
 {
     [DbContext(typeof(PersonsDbContext))]
-    partial class PersonsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306022245_FamilyGroup")]
+    partial class FamilyGroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
+
+            modelBuilder.Entity("Persons.API.Database.Entities.Common.FamilyGroupEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("id");
+
+                    b.Property<string>("CraetedBy")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("CraetedDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_date");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
+
+                    b.Property<string>("RelationShip")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("relationShip");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_by");
+
+                    b.Property<string>("UpdatedDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_date");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("familyGroup");
+                });
 
             modelBuilder.Entity("Persons.API.Database.Entities.CountryEntity", b =>
                 {
@@ -58,39 +99,6 @@ namespace Persons.API.Migrations
                     b.HasIndex("CountryEntityId");
 
                     b.ToTable("countries");
-                });
-
-            modelBuilder.Entity("Persons.API.Database.Entities.FamilyMemberEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("id");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("first_name");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("last_name");
-
-                    b.Property<Guid>("PersonId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("person_id");
-
-                    b.Property<string>("RelationShip")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("relation_ship");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("familyGroup");
                 });
 
             modelBuilder.Entity("Persons.API.Database.Entities.PersonEntity", b =>
@@ -153,17 +161,6 @@ namespace Persons.API.Migrations
                         .HasForeignKey("CountryEntityId");
                 });
 
-            modelBuilder.Entity("Persons.API.Database.Entities.FamilyMemberEntity", b =>
-                {
-                    b.HasOne("Persons.API.Database.Entities.PersonEntity", "Person")
-                        .WithMany("FamilyGroup")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-                });
-
             modelBuilder.Entity("Persons.API.Database.Entities.PersonEntity", b =>
                 {
                     b.HasOne("Persons.API.Database.Entities.CountryEntity", "Country")
@@ -176,11 +173,6 @@ namespace Persons.API.Migrations
             modelBuilder.Entity("Persons.API.Database.Entities.CountryEntity", b =>
                 {
                     b.Navigation("Persons");
-                });
-
-            modelBuilder.Entity("Persons.API.Database.Entities.PersonEntity", b =>
-                {
-                    b.Navigation("FamilyGroup");
                 });
 #pragma warning restore 612, 618
         }

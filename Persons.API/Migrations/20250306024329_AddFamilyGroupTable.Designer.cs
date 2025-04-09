@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persons.API.Database;
 
@@ -10,9 +11,11 @@ using Persons.API.Database;
 namespace Persons.API.Migrations
 {
     [DbContext(typeof(PersonsDbContext))]
-    partial class PersonsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250306024329_AddFamilyGroupTable")]
+    partial class AddFamilyGroupTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -67,6 +70,14 @@ namespace Persons.API.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("id");
 
+                    b.Property<string>("CraetedBy")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_by");
+
+                    b.Property<string>("CraetedDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_date");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -77,6 +88,11 @@ namespace Persons.API.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("last_name");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("name");
+
                     b.Property<Guid>("PersonId")
                         .HasColumnType("TEXT")
                         .HasColumnName("person_id");
@@ -85,6 +101,14 @@ namespace Persons.API.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("relation_ship");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_by");
+
+                    b.Property<string>("UpdatedDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("updated_date");
 
                     b.HasKey("Id");
 

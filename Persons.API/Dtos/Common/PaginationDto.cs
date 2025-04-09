@@ -1,7 +1,9 @@
 ﻿namespace Persons.API.Dtos.Common
 {
+    //La informacion para paginar 
     public class PaginationDto<T> //Para que acepte cualquier valor 
     {
+        public int CurrentPage { get; set; }
         public bool HasNextPage { get; set; }
         
         public bool HasPreviousPage { get; set; }

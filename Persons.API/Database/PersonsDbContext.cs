@@ -12,5 +12,8 @@ namespace Persons.API.Database
         //Aqui se crea el mapa
         public DbSet <PersonEntity> Persons { get; set; }
         public DbSet<CountryEntity> countries { get; set; }
+
+        public DbSet<FamilyMemberEntity> FamilyGroup { get; set; }
+
     }
 }

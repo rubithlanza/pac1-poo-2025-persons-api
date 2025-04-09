@@ -22,6 +22,11 @@ namespace Persons.API.Helpers
             CreateMap<CountryCreateDto, CountryEntity>();
             CreateMap<CountryEditDto, CountryEntity>();
 
+            CreateMap<FamilyMemberCreateDto, FamilyMemberEntity>().ReverseMap();
+            //CreateMap<FamilyMemberEntity, FamilyMemberCreateDto>();
+            //Para que vaya en ambos sentidos usaremos la opcion de reversa 
+
+
         }
     }
 }

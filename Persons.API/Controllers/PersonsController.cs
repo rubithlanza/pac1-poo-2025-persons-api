@@ -18,9 +18,14 @@ namespace Persons.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ResponseDto<List<PersonDtos>>>> GetList()
+        public async Task<ActionResult<ResponseDto<List<PersonDtos>>>> GetList(
+            //3 de marzo
+            string searchTerm = "",
+            int page = 1,
+            int pageSize = 0
+            )
         {
-            var response = await _personsService.GetListAsync();
+            var response = await _personsService.GetListAsync(searchTerm, page, pageSize);
             return StatusCode(response.StatusCode, new
             {
                 response.Status,
@@ -34,7 +39,7 @@ namespace Persons.API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ResponseDto<PersonDtos>>>GetOne(Guid id)
+        public async Task<ActionResult<ResponseDto<PersonDtos>>>GetOne(string id)
         {
             var response = await _personsService.GetOneByIdAsync(id);
             //En el caso que no este el get o otro es por que no esta en el interface 
@@ -73,14 +78,14 @@ namespace Persons.API.Controllers
         //} Los datos son corregidos el dia 25 de febrero del edit 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ResponseDto<PersonActionResponseDto>>> Edit([FromBody] PersonsEditDto dto, Guid id)
+        public async Task<ActionResult<ResponseDto<PersonActionResponseDto>>> Edit([FromBody] PersonsEditDto dto, string id)
         {
             var response = await _personsService.EditAsync(dto, id);
             return StatusCode(response.StatusCode, response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseDto<PersonActionResponseDto>>> Delete (Guid id)
+        public async Task<ActionResult<ResponseDto<PersonActionResponseDto>>> Delete (string id)
         {
             var response = await _personsService.DeleteAsync(id);
             return StatusCode(response.StatusCode, response);

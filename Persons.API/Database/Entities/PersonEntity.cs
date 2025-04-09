@@ -45,11 +45,14 @@ namespace Persons.API.Database.Entities
         //20 de febrero
 
         [Column("country_id")]
-        public Guid? CountryId { get; set; } //Para que se nula el signo de interrogacion 
+        public string CountryId { get; set; } //Para que se nula el signo de interrogacion 
 
         //Para crear la relacion de ambas en propiedad de navegacion 
 
         [ForeignKey(nameof(CountryId))]
         public virtual CountryEntity Country { get; set; }
+
+        //5 de marzo
+        public virtual IEnumerable<FamilyMemberEntity> FamilyGroup { get; set; }
     }
 }

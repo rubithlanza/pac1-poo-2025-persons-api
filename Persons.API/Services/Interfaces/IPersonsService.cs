@@ -8,9 +8,14 @@ namespace Persons.API.Services.Interfaces
     {
         Task<ResponseDto<PersonActionResponseDto>> CreateAsync(PersonCreateDto person); //Esto vendra desde la clase 
         // PersonService y lo haremos con el ctrl mas punto  
-        Task<ResponseDto<PersonActionResponseDto>> DeleteAsync(Guid id);
-        Task<ResponseDto<PersonActionResponseDto>> EditAsync(PersonsEditDto dto, Guid id);
-        Task<ResponseDto<List<PersonDtos>>> GetListAsync();
-        Task<ResponseDto<PersonDtos>> GetOneByIdAsync(Guid id);
+        Task<ResponseDto<PersonActionResponseDto>> DeleteAsync(string id);
+        Task<ResponseDto<PersonActionResponseDto>> EditAsync(PersonsEditDto dto, string id);
+        Task<ResponseDto<PaginationDto<List<PersonDtos>>>> GetListAsync(
+            //3 de marzo
+            string searchTerm = "",
+            int page = 1, 
+            int pageSize = 0
+            );
+        Task<ResponseDto<PersonDtos>> GetOneByIdAsync(string id);
     }
 }

@@ -28,8 +28,13 @@ namespace Persons.API.Dtos.Persons
         [Display(Name = "Pais")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
        // [StringLength(1, ErrorMessage = "El campo {0} debe tener un minimo de {2} y una maximo de {1} caracteres.")]
-        public Guid? CountryId { get; set; } = null;
+        public string CountryId { get; set; } = null;
        // = null ya que cuando salga el codigo 500
+
+        //6 DE MARZI
+        //Arreglo de FamilyMember 
+
+        public List<FamilyMemberCreateDto> Family { get; set; }
 
     }
 }
